@@ -1,56 +1,62 @@
 ---
-title: "Group Performance Report Guide"
+title: "Model Backtest Guide"
 author: "Matt Barry"
-date: "August 5, 2014"
-output: 
+date: "November 6, 2016"
+output:
   beamer_presentation:
-    theme: "Berlin"
-    colortheme: "dolphin"
-    fonttheme: "structurebold"
+    colortheme: crane
+    fonttheme: structurebold
+    theme: Berlin
+    toc: true
+    # toc_depth: 2
+    # number_sections: true
+    fig_width: 7
+    fig_height: 6
+    fig_caption: false
+    highlight: zenburn
+
 ---
+
+<!-- no captions -->
 
 # Introduction
 
+
+
 ## Motivation
 
-- Premise: industry group relative performance is cyclical
-- Tactic: put new money to work in an industry group out-performing other groups
-- Tactic: inform portfolio allocation and buy/sell decisions
+- Provide guidance for backtesting trading models
+- Illustrate parameter search and optimization
+- Identify overfitting risk
+- Results comparison and configuration management
 
-## Approach
+# Optimization
 
-- Use Industry Classification Benchmark assignments provided by exchanges
-- Use *every stock* in each ICB group, daily close price and volume
-- Compute performance of these groups and their roll-ups
-- ICB tiers: Industry, Supersector, Sector, Sector
+## Parameter Search
 
-## Exchanges
+# Trading Simulation
 
-- NYSE provides a full ICB map
-- NASDAQ provides flatter ICB, only two tiers
-- MRB conjured two maps for MLPs and real estate
-- We download maps automatically for each analysis run
+## Data Sources
+
+- Fetch historical data by ticker
+- Check for ticker and exchange swaps
+-- Perhaps only use *latest* universe of GGCM ETFs
+- Adjust OHLC for dividends and splits
+
+
+## Strategy and Rules
+
+## Exchange Interaction
+
+## Blotter Bookkeeping
+
+## Stops
+
+- Our strategies work on months
+- Our stops work on minutes or hours
 
 ## Preprocessing
 
-- Toss stocks no longer trading
-- Fill in stale NYSE map with stocks now trading on NASDAQ
-- Toss stocks with less than 1yr history
-- Toss stocks with missing recent history
-- Toss NASADQ stocks < \$5
-- Compute split-adjusted close prices
-
-## Calculations
-
-- Time frames: short=20d, intermediate=60d, long=120d
-- Group prices: average of every stock's price in that group
-- Group volumes: average of every stock's volume in that group
-- Momentum: continuous method (log) price rate of change
-- Money flow: volume-weighted price over past 20d (Chaikin algorithm)
-- Persistency: percent of days over past 125d money flow > 0
-- Hi-Lo: new high or low price over 13, 26 or 52 weeks
-- Return: one-day price ratio in percent
-- Advance/decline: up or down over time frame
 
 ## Calculations: Trend Indicators and Ranks
 
@@ -60,17 +66,6 @@ output:
 - Rank $R$: ordered ranking within group
 - Weighted Rank \%: $(3R_S + 2R_I + 1R_L)/(6(N-1))$
 
-## Calculations: Rank Position
-
-Curvature rules, where $R$ smaller rank value is higher performance:
-
-- 3: $R_S < R_I \land R_S < R_L \land R_L > R_S \land R_L > R_I$
-- 2: $R_S \leq R_I \land R_S \leq R_L \land R_L \geq R_S \land R_L \geq R_I$
-- 1: $(R_I < R_S \land R_I < R_L) \lor (R_I > R_S \land R_I > R_L) \land R_S < R_L$
-- 0: $R_S = R_I = R_L$
-- -1: $(R_I < R_S \land R_I < R_L) \lor (R_I > R_S \land R_I > R_L) \land R_S > R_L$
-- -2: $R_L \leq R_S \land R_L \leq R_I \land R_S \geq R_I \land R_S \geq R_L$
-- -3: $R_L < R_S \land R_L < R_I \land R_S > R_I \land R_S > R_L$
 
 ## Calculations: Rank Position
 
@@ -96,61 +91,8 @@ par(mfrow=c(1,1))
 
 ```
 
-# Rank Figures
-
-## Figure Groups
-
-- NYSE rankings by industry, super-sector, sector and sub-sector
-- NASDAQ rankings by industry, sector
-- Special rankings by sector
-
-## NYSE Industry
-
-![indus](images/indus1mem.png)
-
-## NYSE Industry
-
-![indus](images/indus2hilo.png)
-
-## NYSE Industry
-
-![indus](images/indus3pchg.png)
-
-## NYSE Industry
-
-![indus](images/indus4adv.png)
-
-## NYSE Industry
-
-![indus](images/indus5short.png)
-
-## NYSE Industry
-
-![indus](images/indus6inter.png)
-
-## NYSE Industry
-
-![indus](images/indus7long.png)
-
-## NYSE Industry
-
-![indus](images/indus8psmf.png)
-
-## NYSE Industry
-
-![indus](images/indus9rank.png)
-
-## NYSE Industry
-
-![indus](images/indus91gear.png)
-
 
 # Trend Figures
-
-## Figure Groups
-
-- NYSE trends by industry, super-sector, sector and sub-sector
-- NASDAQ trends by industry, sector
 
 ## NASDAQ Industry
 
@@ -158,23 +100,7 @@ par(mfrow=c(1,1))
 
 NASDAQ industries trend, left-hand side is today, right-hand side is 30 days ago.  Trend shown is short-term momentum value; other trends provided are PSMF, intermediate-term momentum, and long-term momentum.  Color is tied to the momentum trend indicator value (up or down).  
 
-## NASDAQ Industry
+----
 
-![trend](images/trend-nasdaq-indus5.png)
-
-NASDAQ industries trend, left-hand side is today, right-hand side is 30 days ago.  All of the table values are considered in forming quartiles for coloring.  Quartile values and colors then indicate relative value over time, not up or down performance.  
-
-## NASDAQ Industry
-
-![trend](images/trend-nasdaq-indus6.png)
-
-NASDAQ industries trend, left-hand side is today, right-hand side is 30 days ago.  Only daily values are considered in forming quartiles for coloring.  Quartile values and colors then indicate relative value for the day, not up or down performance.  If daily values are too close to form quartiles we show zeros. 
-
-# Notes
-
-## Notes Section
-
-- Tickers included or excluded in analyses
-- ICB reference
-
+![](images/logos/greatgraycapitalmanagementllp-GIF-D.gif)
 
