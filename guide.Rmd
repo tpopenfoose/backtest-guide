@@ -7,21 +7,20 @@ output:
     colortheme: crane
     fonttheme: structurebold
     theme: Berlin
-    toc: true
+    # toc: true
     # toc_depth: 2
     # number_sections: true
     fig_width: 7
     fig_height: 6
     fig_caption: false
-    highlight: zenburn
+    slide_level: 2
 
 ---
 
-<!-- no captions -->
 
 # Introduction
 
-
+Introduction to charts
 
 ## Motivation
 
@@ -32,9 +31,37 @@ output:
 
 # Optimization
 
+Optimization setup
+
 ## Parameter Search
 
+- Distributions, combinations
+- Dynamic Range
+
+----
+
+![surface](images/surface.png)
+
+Multiple parameter search yields rough optimization surface.
+
+
+## Expectation
+
+- Local vs. Global Optimization
+- Robust Solutions
+
 # Trading Simulation
+
+Trading simulation
+
+## Tool Chain
+
+1. Manage Data
+1. Evaluate Data
+1. Determine Trades
+1. Size Trades
+1. Calculate Performance
+1. Analyze Performance
 
 ## Data Sources
 
@@ -46,17 +73,41 @@ output:
 
 ## Strategy and Rules
 
+- Indicators
+-- Derived from market data, path-independent
+- Signals
+-- Interaction between market data and indicators
+-- Desire for action, but may not be actionable
+- Rules
+-- Path-dependent action on signals
+-- Aware of current positions and time
+-- Computation of order size
+-- Position limits
+-- Periodic rebalancing
+-- Entry, exit and risk-management orders
+
 ## Exchange Interaction
+
+- Market hours open, close
+
+
 
 ## Blotter Bookkeeping
 
-## Stops
+- Order posts, fills, and cancels
+- "Mark the book" with current holdings and prices
+
+## Orders
 
 - Our strategies work on months
 - Our stops work on minutes or hours
+- Order chains: parent fill triggers set of follow-up OCO orders
 
 ## Preprocessing
 
+- Adjusting splits and dividends
+- Cleaning zeros and NAs
+- Accounting for exchange moves
 
 ## Calculations: Trend Indicators and Ranks
 
@@ -91,16 +142,17 @@ par(mfrow=c(1,1))
 
 ```
 
-
-# Trend Figures
-
-## NASDAQ Industry
-
-![trend](images/trend-nasdaq-indus4.png)
-
-NASDAQ industries trend, left-hand side is today, right-hand side is 30 days ago.  Trend shown is short-term momentum value; other trends provided are PSMF, intermediate-term momentum, and long-term momentum.  Color is tied to the momentum trend indicator value (up or down).  
-
 ----
 
 ![](images/logos/greatgraycapitalmanagementllp-GIF-D.gif)
+
+
+# Backup
+
+## References
+
+
+- Humme and Peterson, "Using Quantstrat Tutorial", 2013
+- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
+
 
