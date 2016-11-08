@@ -1,12 +1,12 @@
 ---
 title: "Model Backtest Guide"
-author: "Matt Barry"
+author: "Great Gray Capital Management LLP"
 date: "November 6, 2016"
 output:
   beamer_presentation:
-    colortheme: crane
+    colortheme: ggcmowl
     fonttheme: structurebold
-    theme: Berlin
+    theme: Ggcm
     # toc: true
     # toc_depth: 2
     # number_sections: true
@@ -142,9 +142,10 @@ par(mfrow=c(1,1))
 
 ```
 
-----
+## Model Update Flow
 
-![](images/logos/greatgraycapitalmanagementllp-GIF-D.gif)
+![update](images/flow-update.png)
+
 
 
 # Backup
