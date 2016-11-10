@@ -20,7 +20,7 @@ output:
 
 # Introduction
 
-## Syopsis
+## Synopsis
 
 We have several models backtested and validated, but we have money invested
 in only a few of them.  Each month, how do we decide which models to
@@ -36,9 +36,9 @@ activate or deactivate?
 
 Give model candidates, which to choose? 
 
-- Use _Markowitz selection_? (the bullet model)
-- Use _risk parity_, risk on when market volatility declines? 
-- Use _accumulating size_, incrementally adding to winning positions? 
+* Use _Markowitz selection_? (the bullet model)
+* Use _risk parity_, risk on when market volatility declines? 
+* Use _accumulating size_, incrementally adding to winning positions? 
 
 
 # Competition
@@ -60,7 +60,6 @@ Give model candidates, which to choose?
     + Out-of-sample vs. in-sample expected metrics
 
 
-
 ## Activation
 
 * _Activation_ refers to placing a model into portfolio; it becomes investable but may have zero weighting
@@ -68,10 +67,16 @@ Give model candidates, which to choose?
 
 ----
 
-![pool](images/flow-)
+![pool](images/flow-pool.png)
 
 
-## Relegation and Promotion
+## Promotion and Relegation
+
+* Some models are better than others, especially out-of-sample
+* We don't want to invest in all of our models
+* Models should earn their way into our portfolio
+* Try a *[promotion and relegation](https://en.wikipedia.org/wiki/Promotion_and_relegation)* approach
+
 
 ----
 
@@ -99,7 +104,9 @@ Model retirement
 ![pool](images/flow-retire.png)
 
 
+----
 
+![track](images/flow-track.png)
 
 
 
@@ -120,9 +127,13 @@ Model retirement
     * CAGR rank, Sortino Ratio rank, Calmar Ratio rank
     * $\sigma^2_\mathrm{SR}$ deviation from backtest
 * Select top $N$ models for activation, weighted by Calmar Ratio
-* Within each mnodel, weight funds by model-specific method
+* Within each model, weight funds by model-specific method
 
 
 ## References
 
 * None
+
+
+
+
