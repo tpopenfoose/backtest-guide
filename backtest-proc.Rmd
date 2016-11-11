@@ -1,5 +1,5 @@
 ---
-title: "Model Backtest Guide"
+title: "Backtest Procedures"
 author: "Great Gray Capital Management LLP"
 date: "November 6, 2016"
 output:
@@ -17,42 +17,14 @@ output:
 
 ---
 
-
 # Introduction
-
-Introduction to charts
 
 ## Motivation
 
-- Provide guidance for backtesting trading models
-- Illustrate parameter search and optimization
-- Identify overfitting risk
-- Results comparison and configuration management
-
-# Optimization
-
-Optimization setup
-
-## Parameter Search
-
-- Distributions, combinations
-- Dynamic Range
-
-----
-
-![surface](images/surface.png)
-
-Multiple parameter search yields rough optimization surface.
-
-
-## Expectation
-
-- Local vs. Global Optimization
-- Robust Solutions
+* Recap experience for backtesting trading models
+* Offer ideas for automation and configuration management
 
 # Trading Simulation
-
-Trading simulation
 
 ## Tool Chain
 
@@ -65,50 +37,48 @@ Trading simulation
 
 ## Data Sources
 
-- Fetch historical data by ticker
-- Check for ticker and exchange swaps
--- Perhaps only use *latest* universe of GGCM ETFs
-- Adjust OHLC for dividends and splits
+* Fetch historical data by ticker
+* Check for ticker and exchange swaps
+    - Most efficiently use _latest_ universe of GGCM ETFs
+* Adjust OHLC for dividends and splits
 
 
 ## Strategy and Rules
 
-- Indicators
--- Derived from market data, path-independent
-- Signals
--- Interaction between market data and indicators
--- Desire for action, but may not be actionable
-- Rules
--- Path-dependent action on signals
--- Aware of current positions and time
--- Computation of order size
--- Position limits
--- Periodic rebalancing
--- Entry, exit and risk-management orders
-
-## Exchange Interaction
-
-- Market hours open, close
-
-
+* Indicators
+    - Derived from market data, path-independent
+* Signals
+    - Interaction between market data and indicators
+    - Desire for action, but may not be actionable
+* Rules
+    - Path-dependent action on signals
+    - Aware of current positions and time
+    - Computation of order size
+    - Position limits
+    - Periodic rebalancing
+    - Entry, exit and risk-management orders
 
 ## Blotter Bookkeeping
 
-- Order posts, fills, and cancels
-- "Mark the book" with current holdings and prices
+* Order posts, fills, and cancels
+* Commissions and ticket charges
+* Cash balance tracking
+* "Mark the book" with current holdings and prices
+* Periodic portfolio equity determination for rebalancing
 
 ## Orders
 
-- Our strategies work on months
-- Our stops work on minutes or hours
-- Order chains: parent fill triggers set of follow-up OCO orders
+* Our strategies work on months
+* Stops tested on $m$ minute periods
+* Order chains: parent fill triggers set of follow-up OCO orders
 
 ## Preprocessing
 
-- Adjusting splits and dividends
-- Cleaning zeros and NAs
-- Accounting for exchange moves
+* Adjusting OHLC historical prices for splits and dividends
+* Cleaning zeros and NAs
+* Accounting for exchange moves
 
+# Automation
 
 ## Model Backtest Flow
 
@@ -118,27 +88,14 @@ Trading simulation
 
 ![update](images/flow-update.png)
 
+## Change Management
 
-## Model Competition
-
-* Monthly assessment of invested models
-* Monthly assessment of candidate models
-* Decision to relegate or promote models
-* Decision to weight allocation equally or by performance 
-
-----
-
-![pool](images/flow-pool.png)
-
+![git](images/github_partners.png)
 
 # Backup
 
 ## References
 
-
-- Antonacci, "Dual Momentum Investing", 2015
-- Gray and Vogel, "Quantitative Momentum", 2016
-- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
-- Humme and Peterson, "Using Quantstrat Tutorial", 2013
+* None
 
 

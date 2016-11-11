@@ -1,0 +1,8 @@
+## References
+
+
+- Antonacci, "Dual Momentum Investing", 2015
+- Gray and Vogel, "Quantitative Momentum", 2016
+- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
+- Humme and Peterson, "Using Quantstrat Tutorial", 2013
+
