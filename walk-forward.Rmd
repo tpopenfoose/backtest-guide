@@ -1,7 +1,7 @@
 ---
-title: "Model Backtest Guide"
+title: "Walk-Forward Analysis"
 author: "Great Gray Capital Management LLP"
-date: "November 6, 2016"
+date: "November 12, 2016"
 output:
   beamer_presentation:
     colortheme: ggcmowl
@@ -20,125 +20,33 @@ output:
 
 # Introduction
 
-Introduction to charts
-
 ## Motivation
 
-- Provide guidance for backtesting trading models
-- Illustrate parameter search and optimization
-- Identify overfitting risk
-- Results comparison and configuration management
+- Provide a synopsis of walk-forward analysis technique
 
-# Optimization
+# Walk-Forward Analysis
 
-Optimization setup
+## Walk-Forward Analysis
 
-## Parameter Search
+Instead of making one backtest from a given historical data set, make several smaller backtests, each containing an IS and OOS period, for better comparison.  The following figure illustrates making eight WFA backtests from one dataset. 
 
-- Distributions, combinations
-- Dynamic Range
+* This example uses a _rolling_ configuration that overlays backtests and moves the start point forward by one period.
+* An alternative is an _anchor_ starting point always pinned to the first period, making each backtest IS period successively longer.  In this case the OOS period could be either a fixed brief duration or a successively shorter period chosen to consume all of the history.  
 
-----
+## Walk-Forward Analysis
 
-![surface](images/surface.png)
+![wf](images/wf3.jpg)
 
-Multiple parameter search yields rough optimization surface.
+## Walk-Forward Analysis
 
-
-## Expectation
-
-- Local vs. Global Optimization
-- Robust Solutions
-
-# Trading Simulation
-
-Trading simulation
-
-## Tool Chain
-
-1. Manage Data
-1. Evaluate Data
-1. Determine Trades
-1. Size Trades
-1. Calculate Performance
-1. Analyze Performance
-
-## Data Sources
-
-- Fetch historical data by ticker
-- Check for ticker and exchange swaps
--- Perhaps only use *latest* universe of GGCM ETFs
-- Adjust OHLC for dividends and splits
+* For some number of slices of the historical timeframe, the slices could be exclusive or non-exclusive.  
+* The OOS periods, pasted together, could represent a full OOS simulation but are unlikely to represent such a simulation owing to memory (initial conditions) across boundaries
+* For long-lookback algorithms (e.g. 12-month SMA) it is necessary to have long OOS periods merely to obtain one sample for consideration
 
 
-## Strategy and Rules
+# Recommendation
 
-- Indicators
--- Derived from market data, path-independent
-- Signals
--- Interaction between market data and indicators
--- Desire for action, but may not be actionable
-- Rules
--- Path-dependent action on signals
--- Aware of current positions and time
--- Computation of order size
--- Position limits
--- Periodic rebalancing
--- Entry, exit and risk-management orders
+## Recommendation
 
-## Exchange Interaction
-
-- Market hours open, close
-
-
-
-## Blotter Bookkeeping
-
-- Order posts, fills, and cancels
-- "Mark the book" with current holdings and prices
-
-## Orders
-
-- Our strategies work on months
-- Our stops work on minutes or hours
-- Order chains: parent fill triggers set of follow-up OCO orders
-
-## Preprocessing
-
-- Adjusting splits and dividends
-- Cleaning zeros and NAs
-- Accounting for exchange moves
-
-
-## Model Backtest Flow
-
-![backtest](images/flow-backtest.png)
-
-## Model Update Flow
-
-![update](images/flow-update.png)
-
-
-## Model Competition
-
-* Monthly assessment of invested models
-* Monthly assessment of candidate models
-* Decision to relegate or promote models
-* Decision to weight allocation equally or by performance 
-
-----
-
-![pool](images/flow-pool.png)
-
-
-# Backup
-
-## References
-
-
-- Antonacci, "Dual Momentum Investing", 2015
-- Gray and Vogel, "Quantitative Momentum", 2016
-- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
-- Humme and Peterson, "Using Quantstrat Tutorial", 2013
-
-
+* Where practicable given a reasonable length of historical exchange data, apply WFA to collect a set of OOS tests.  
+* Demonstrate that these OOS performance results are robust across time periods and meet expectations of IS parameter selections.  
