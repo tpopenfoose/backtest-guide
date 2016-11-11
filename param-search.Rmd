@@ -1,7 +1,7 @@
 ---
-title: "Model Backtest Guide"
+title: "Parameter Search"
 author: "Great Gray Capital Management LLP"
-date: "November 6, 2016"
+date: "November 12, 2016"
 output:
   beamer_presentation:
     colortheme: ggcmowl
@@ -20,125 +20,64 @@ output:
 
 # Introduction
 
-Introduction to charts
-
 ## Motivation
 
-- Provide guidance for backtesting trading models
-- Illustrate parameter search and optimization
-- Identify overfitting risk
-- Results comparison and configuration management
+* Discuss model design parameter search issues
 
-# Optimization
 
-Optimization setup
+# Model Optimization
 
 ## Parameter Search
 
-- Distributions, combinations
-- Dynamic Range
 
-----
+* Model parameter distributions and combinations imply search space
+* Search procedure may find local or global extrema
+* We presumably want solutions robust to small excursions in parameter values
 
-![surface](images/surface.png)
+Elsewhere we discuss the issues with model combinations, sufficient history, and expected performance parameters w.r.t. overfitting.
 
-Multiple parameter search yields rough optimization surface.
+## Search Surface
 
+\small An example of multiple parameter search result surface.  Which parameter pair would you choose as a model solution?
 
-## Expectation
+![surfacep](images/search0a.jpg)
 
-- Local vs. Global Optimization
-- Robust Solutions
+## Search Surface
 
-# Trading Simulation
+\small Another example of multiple parameter search result surface.  Parameter selection more difficult owing to steeper penalties. 
 
-Trading simulation
+![surfacek](images/search0b.png)
 
-## Tool Chain
+## Joint Metric Surface Evaluation
 
-1. Manage Data
-1. Evaluate Data
-1. Determine Trades
-1. Size Trades
-1. Calculate Performance
-1. Analyze Performance
+\small Ranking several performance metrics may expose a region of closely-related cases (robust selection).
 
-## Data Sources
+![s1](images/search1.png)
 
-- Fetch historical data by ticker
-- Check for ticker and exchange swaps
--- Perhaps only use *latest* universe of GGCM ETFs
-- Adjust OHLC for dividends and splits
+## Joint Metric Subset
 
+\small Zooming-in to ranked performance measures for case selection.
 
-## Strategy and Rules
+![s2](images/search2.png)
 
-- Indicators
--- Derived from market data, path-independent
-- Signals
--- Interaction between market data and indicators
--- Desire for action, but may not be actionable
-- Rules
--- Path-dependent action on signals
--- Aware of current positions and time
--- Computation of order size
--- Position limits
--- Periodic rebalancing
--- Entry, exit and risk-management orders
+## Joint Metric Subset
 
-## Exchange Interaction
+\small Same model, same region, alternative performance measures consideration.
 
-- Market hours open, close
+![s3](images/search3.png)
 
+## Heat Map Visualization
 
+\small MACD parameter visualization with regional cases identified. 
 
-## Blotter Bookkeeping
+![s4](images/search4.png)
 
-- Order posts, fills, and cancels
-- "Mark the book" with current holdings and prices
+# Recommendation
 
-## Orders
+## Recommendation
 
-- Our strategies work on months
-- Our stops work on minutes or hours
-- Order chains: parent fill triggers set of follow-up OCO orders
-
-## Preprocessing
-
-- Adjusting splits and dividends
-- Cleaning zeros and NAs
-- Accounting for exchange moves
-
-
-## Model Backtest Flow
-
-![backtest](images/flow-backtest.png)
-
-## Model Update Flow
-
-![update](images/flow-update.png)
-
-
-## Model Competition
-
-* Monthly assessment of invested models
-* Monthly assessment of candidate models
-* Decision to relegate or promote models
-* Decision to weight allocation equally or by performance 
-
-----
-
-![pool](images/flow-pool.png)
-
-
-# Backup
-
-## References
-
-
-- Antonacci, "Dual Momentum Investing", 2015
-- Gray and Vogel, "Quantitative Momentum", 2016
-- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
-- Humme and Peterson, "Using Quantstrat Tutorial", 2013
+* Evaluate your backtests for robust parameter selection.  If a moving average lookback is off by one day, does the model become a debacle?  
+* Sacrifice a global optimum in favor of a local optimum when the latter has a broad region of good performance robust to small perturbations in the parameter vaules.
+* Document your rationale so that your successors, who presumably will uncover the same extrema, can follow your decisions. 
 
 
