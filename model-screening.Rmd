@@ -1,5 +1,5 @@
 ---
-title: "Model Backtest Guide"
+title: "Model Screening"
 author: "Great Gray Capital Management LLP"
 date: "November 6, 2016"
 output:
@@ -17,128 +17,10 @@ output:
 
 ---
 
+# Model Trade Timing
 
-# Introduction
+## Model Trade Timing
 
-Introduction to charts
-
-## Motivation
-
-- Provide guidance for backtesting trading models
-- Illustrate parameter search and optimization
-- Identify overfitting risk
-- Results comparison and configuration management
-
-# Optimization
-
-Optimization setup
-
-## Parameter Search
-
-- Distributions, combinations
-- Dynamic Range
-
-----
-
-![surface](images/surface.png)
-
-Multiple parameter search yields rough optimization surface.
-
-
-## Expectation
-
-- Local vs. Global Optimization
-- Robust Solutions
-
-# Trading Simulation
-
-Trading simulation
-
-## Tool Chain
-
-1. Manage Data
-1. Evaluate Data
-1. Determine Trades
-1. Size Trades
-1. Calculate Performance
-1. Analyze Performance
-
-## Data Sources
-
-- Fetch historical data by ticker
-- Check for ticker and exchange swaps
--- Perhaps only use *latest* universe of GGCM ETFs
-- Adjust OHLC for dividends and splits
-
-
-## Strategy and Rules
-
-- Indicators
--- Derived from market data, path-independent
-- Signals
--- Interaction between market data and indicators
--- Desire for action, but may not be actionable
-- Rules
--- Path-dependent action on signals
--- Aware of current positions and time
--- Computation of order size
--- Position limits
--- Periodic rebalancing
--- Entry, exit and risk-management orders
-
-## Exchange Interaction
-
-- Market hours open, close
-
-
-
-## Blotter Bookkeeping
-
-- Order posts, fills, and cancels
-- "Mark the book" with current holdings and prices
-
-## Orders
-
-- Our strategies work on months
-- Our stops work on minutes or hours
-- Order chains: parent fill triggers set of follow-up OCO orders
-
-## Preprocessing
-
-- Adjusting splits and dividends
-- Cleaning zeros and NAs
-- Accounting for exchange moves
-
-
-## Model Backtest Flow
-
-![backtest](images/flow-backtest.png)
-
-## Model Update Flow
-
-![update](images/flow-update.png)
-
-
-## Model Competition
-
-* Monthly assessment of invested models
-* Monthly assessment of candidate models
-* Decision to relegate or promote models
-* Decision to weight allocation equally or by performance 
-
-----
-
-![pool](images/flow-pool.png)
-
-
-# Backup
-
-## References
-
-
-- Antonacci, "Dual Momentum Investing", 2015
-- Gray and Vogel, "Quantitative Momentum", 2016
-- Hochreiter, "Financial Portfolio Optimization with (O)R", 2013
-- Humme and Peterson, "Using Quantstrat Tutorial", 2013
+![opcl](images/screen1.png)
 
 
